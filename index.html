@@ -3,20 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>home work 2</title>
+    <title>Document</title>
   </head>
   <body>
     <script>
-      const BIRTHDAY = "23.12.1990 ";
-      let y = 18; // совершеннолетие
-      let x = 11; // столько лет я принимаю самостоятельные решения :)
-      let line = "years ";
-      let age = y + x + line; //мой возраст
-      let userName = "Helen Grigoriu. ";
-      let message = "Hello, Kostya!";
-
-      alert(userName + BIRTHDAY + age + message);
-
+      "use strict";
+      let userName = prompt("как тебя зовут?", "имя");
+      let qwestion = confirm("Привет " + userName + " " + ",идем дальше?");
+      if (qwestion === true) {
+        alert("погнали,дальше будет интересней!");
+      } else {
+        alert("зря,но мы всеравно попробуем!");
+      }
+      let age = prompt("сколько тебе лет?", "");
+      let message = confirm("алкоголь употребляешь?");
+      if (message === false) {
+        alert("Так держать," + userName + "!");
+      } else if (age < 18) {
+        alert("Ты что?! Маме расскажу!");
+      } else if (age > 40) {
+        alert("Не злоупотребляйте");
+      } else if (age >= 18 && age <= 40) {
+        alert("Только водку с пивом не мешай...");
+      }
     </script>
   </body>
 </html>
