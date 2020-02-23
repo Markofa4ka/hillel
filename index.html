@@ -3,35 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>herringbone cycles</title>
   </head>
   <body>
     <script>
-      'use strict';
-      const userName = prompt('как тебя зовут?', 'имя');
-      const age = + prompt('сколько тебе лет?', '');
+        'use strict';
+        let treeHeight = Number(prompt('Введите число,высоты елочки!', ''));
+        let star = '*';
 
-      if (isNaN(age) || !Number(age)) {
-        alert('Введите ваш возраст,пожалуйста !');
-        prompt('сколько тебе лет?', '');
-      }else {
-        alert('супер');
-      }
-      
-      const message = confirm('алкоголь употребляешь?');
-
-        if (!message) {
-          alert('Так держать, ' + userName + '!');
-        }else {
-          if (age < 18) {
-            alert('Ты что?! Маме расскажу!');
-          } else if (age > 40) {
-            alert('Не злоупотребляйте');
-          } else if (age >= 18 && age <= 40) {
-            alert('Только водку с пивом не мешай...');
-          }
+        for (let i = 0; i < 1; i++) {
+            let res = '';
+            for (let j = 0; j < treeHeight; j++) {   
+            res += star + '\n';
+            star += '*';
+            }
+            console.log(res);
         }
-        
     </script>
   </body>
 </html>
