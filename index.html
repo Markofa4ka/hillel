@@ -3,22 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>herringbone cycles</title>
+    <title>Document</title>
   </head>
   <body>
     <script>
-        'use strict';
-        let treeHeight = Number(prompt('Введите число,высоты елочки!', ''));
-        let star = '*';
+      "use strict";
+      function calcCircleArea(r) {
+        return Math.PI * Math.pow(r, 2);
+      }
+      console.log(calcCircleArea(+prompt("введи размер радиуса круга!", ""))); // площадь круга
 
-        for (let i = 0; i < 1; i++) {
-            let res = '';
-            for (let j = 0; j < treeHeight; j++) {   
-            res += star + '\n';
-            star += '*';
-            }
-            console.log(res);
+      function calcCircumference(r) {
+        return 2 * Math.PI * r;
+      }
+      console.log(calcCircumference(+prompt("введи размер радиуса круга!", ""))); // длина окружности
+
+      function calcAverageNumder(a, b) {
+        return (a + b) / 2;
+      }
+      console.log(calcAverageNumder(8, 6)); // среднее арефметическое
+
+      function calcSum(a, b, division) {
+        if (division === "/") {
+          return a / b;
         }
+      }
+      console.log(calcSum(5, 4, "/"));
     </script>
   </body>
 </html>
