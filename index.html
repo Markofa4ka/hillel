@@ -8,27 +8,100 @@
   <body>
     <script>
       "use strict";
-      function calcCircleArea(r) {
-        return Math.PI * Math.pow(r, 2);
+      let students = [
+        {
+          name: "Grisha",
+          gender: "male",
+          birthDate: 1990
+        },
+        {
+          name: "Helen",
+          gender: "female",
+          birthDate: 1998
+        },
+        {
+          name: "Andrey",
+          gender: "male",
+          birthDate: 1992
+        },
+        {
+          name: "Natalia",
+          gender: "female",
+          birthDate: 1995
+        },
+        {
+          name: "Artem",
+          gender: "male",
+          birthDate: 1980
+        },
+        {
+          name: "Alina",
+          gender: "female",
+          birthDate: 1994
+        }
+      ];
+      function getAverageAge(students) {
+        let average = 0;
+        for (let i = 0; i <= students.length - 1; i++) {
+          average += new Date().getFullYear() - students[i].birthDate;
+        }
+        return average / students.length;
       }
-      console.log(calcCircleArea(+prompt("введи размер радиуса круга!", ""))); // площадь круга
-
-      function calcCircumference(r) {
-        return 2 * Math.PI * r;
-      }
-      console.log(calcCircumference(+prompt("введи размер радиуса круга!", ""))); // длина окружности
-
-      function calcAverageNumder(a, b) {
-        return (a + b) / 2;
-      }
-      console.log(calcAverageNumder(8, 6)); // среднее арефметическое
-
-      function calcSum(a, b, division) {
-        if (division === "/") {
-          return a / b;
+      function checkMostGender(students) {
+        let male = 0;
+        let female = 0;
+        for (let i = 0; i <= students.length - 1; i++) {
+          if (students[i].gender === "male") {
+            male++;
+          } else {
+            female++;
+          }
+        }
+        if (male > female) {
+          return "male";
+        } else if (male < female) {
+          return "female";
+        } else {
+          return "equally";
         }
       }
-      console.log(calcSum(5, 4, "/"));
+      console.log(getAverageAge(students));
+      console.log(checkMostGender(students));
+
+      /*----------------№2--------------*/
+
+      let arr = [1, 2, 3, 4, 5, 6];
+      let brr = clone(arr);
+      console.log(brr); // [1,2,3,4,5,6]
+      brr[0] = 42;
+      console.log(brr); // [42,2,3,4,5,6]
+      console.log(arr); // [1,2,3,4,5,6]
+
+      function clone(arr1) {
+        let arr2 = [];
+        for (let i = 0; i < arr.length; ++i) {
+          arr2[i] = arr1[i];
+        }
+        return arr2;
+      }
+
+      /*----------------№3--------------*/
+
+      let arr3 = [1, 2, 3, 4, 5, 6];
+      function filter(arr3, cb) {
+        let arr1 = [];
+        for (let i = 0; i < arr3.length; ++i) {
+          let newInd = arr1.length;
+          if (cb(arr3[i])) {
+            arr1[newInd] = arr3[i];
+          }
+        }
+        return arr1;
+      }
+      function isEven(x) {
+        return x % 2 === 0; // проверяет на четность
+      }
+      console.log(filter(arr3, isEven)); // [2, 4, 6]
     </script>
   </body>
 </html>
