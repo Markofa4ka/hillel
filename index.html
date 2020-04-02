@@ -2,52 +2,106 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="wclassth=device-wclassth, initial-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
   <body>
     <script>
       "use strict";
+      const arr = [-246, 753, -468, 475, -683, 476, -583, 746, -581];
 
-      function generateList(array) {
-        let ul = document.createElement("ul");
-        array.forEach(function(el) {
-          let li = document.createElement("li");
-          let childElm;
+      let sumEl = arr.reduce(function(sum, current) {
+        return sum + current;
+      }, 0);
+      console.log([sumEl]);
 
-          if (Array.isArray(el)) {
-            childElm = generateList(el);
-          } else {
-            childElm = document.createTextNode(el);
-          }
+      // function sumEl (arr) {
+      //   let sum = 0;
+      //   for (let i = 0; i < arr.length; i++) {
+      //      sum += arr[i];
+      //   }
+      //   return [sum];
+      // }
+      // console.log(sumEl (arr));
 
-          li.appendChild(childElm);
-          ul.appendChild(li);
+      let brr = arr.filter(function(num) {
+        return num < 0;
+      });
+      console.log(brr);
+
+      // function negativeEl (el) {
+      //   let res = [];
+      //   for (let i = 0; i < el.length; i++) {
+      //     if ( el[i] < 0 ) {
+      //        res += el[i] + ', ';
+      //     }
+      //   }
+      //   return [res];
+      // }
+      // // не могу понять только, как вывести из строки в массиве в число!
+      // console.log(negativeEl (arr));
+
+      let num = arr.sort(function(a, b) {
+        return a - b;
+      });
+      console.log(num);
+
+      console.log(arr.reverse(num));
+
+      let divisionEl = arr.map(function(arr) {
+        return arr / 2;
+      });
+      console.log(divisionEl);
+
+      /*-------------№2---------------*/
+
+      const str = "12, 42, 63, 56, 122, 17, 117, 25, 645, 722, 964";
+
+      let strArr = str.split(", ").map(function(el) {
+        return +el;
+      });
+      console.log(strArr);
+
+      //   function numArr(str) {
+      //     let num = str.split(", ");
+      //     let res = [];
+      //     for (let i = 0; i < num.length; i++) {
+      //       res[i] = Number(num[i]);
+      //     }
+      //     return res;
+      //   }
+      //   console.log(numArr(str));
+
+      console.log(
+        strArr.filter(function(item) {
+          return item % 2 == 0;
+        })
+      );
+      /*-------------№3---------------*/
+      const scheme = [
+        ["name", "Vasya"],
+        ["age", 25],
+        ["score", 95]
+      ];
+
+      function makeObjectFromScheme(arr) {
+        let obj = {};
+        arr.forEach (function (el){
+          obj[el[0]] = el[1];
         });
-
-        return ul;
+        return obj;
       }
+      console.log(makeObjectFromScheme(scheme));
 
-      document.body.appendChild(generateList([1, 2, 3]));
-      document.body.appendChild(generateList([1, 2, [1.1, 1.2, 1.3], 3]));
-      
-      let i = 1;
-      document.write("<table border=5>");
-      while (i <= 100) {
-        document.write("<tr>");
-        let j = 1;
-        while (j <= 10) {
-          document.write("<td>");
-          document.write(i++);
-          document.write("</td>");
-          j++;
+      let student = makeObjectFromScheme(scheme);
+      function makeSchemeFromScheme(obj) {
+        let arr = [];
+        for (let key in obj) {
+          arr.push([key, obj[key]]);
         }
-        document.write("</tr>");
+        return arr;
       }
-      document.write("</table>");
+      console.log(makeSchemeFromScheme(student));
     </script>
   </body>
 </html>
