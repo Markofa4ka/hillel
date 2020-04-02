@@ -7,101 +7,46 @@
   </head>
   <body>
     <script>
-      "use strict";
-      const arr = [-246, 753, -468, 475, -683, 476, -583, 746, -581];
+      "use stict";
 
-      let sumEl = arr.reduce(function(sum, current) {
-        return sum + current;
-      }, 0);
-      console.log([sumEl]);
-
-      // function sumEl (arr) {
-      //   let sum = 0;
-      //   for (let i = 0; i < arr.length; i++) {
-      //      sum += arr[i];
-      //   }
-      //   return [sum];
-      // }
-      // console.log(sumEl (arr));
-
-      let brr = arr.filter(function(num) {
-        return num < 0;
-      });
-      console.log(brr);
-
-      // function negativeEl (el) {
-      //   let res = [];
-      //   for (let i = 0; i < el.length; i++) {
-      //     if ( el[i] < 0 ) {
-      //        res += el[i] + ', ';
-      //     }
-      //   }
-      //   return [res];
-      // }
-      // // не могу понять только, как вывести из строки в массиве в число!
-      // console.log(negativeEl (arr));
-
-      let num = arr.sort(function(a, b) {
-        return a - b;
-      });
-      console.log(num);
-
-      console.log(arr.reverse(num));
-
-      let divisionEl = arr.map(function(arr) {
-        return arr / 2;
-      });
-      console.log(divisionEl);
-
-      /*-------------№2---------------*/
-
-      const str = "12, 42, 63, 56, 122, 17, 117, 25, 645, 722, 964";
-
-      let strArr = str.split(", ").map(function(el) {
-        return +el;
-      });
-      console.log(strArr);
-
-      //   function numArr(str) {
-      //     let num = str.split(", ");
-      //     let res = [];
-      //     for (let i = 0; i < num.length; i++) {
-      //       res[i] = Number(num[i]);
-      //     }
-      //     return res;
-      //   }
-      //   console.log(numArr(str));
-
-      console.log(
-        strArr.filter(function(item) {
-          return item % 2 == 0;
-        })
-      );
-      /*-------------№3---------------*/
-      const scheme = [
-        ["name", "Vasya"],
-        ["age", 25],
-        ["score", 95]
+      let keys = [
+        ["value", 42, true, false, false],
+        ["value2", true, false, false, false],
+        ["value3", "Hello", true, true, true]
       ];
 
-      function makeObjectFromScheme(arr) {
+      //   [key, value, enumerable, writable, configurable],
+
+      function createObject(keys) {
         let obj = {};
-        arr.forEach (function (el){
-          obj[el[0]] = el[1];
+        keys.forEach(function(el) {
+          Object.defineProperty(obj, el[0], {
+            value: el[1],
+            enumerable: el[2],
+            writable: el[3],
+            configurable: el[4]
+          });
         });
         return obj;
       }
-      console.log(makeObjectFromScheme(scheme));
+      console.log(createObject(keys));
+      /* ------- 2------ */
+      let obj1 = {
+        value: 42,
+        value2: true
+      };
 
-      let student = makeObjectFromScheme(scheme);
-      function makeSchemeFromScheme(obj) {
-        let arr = [];
-        for (let key in obj) {
-          arr.push([key, obj[key]]);
-        }
-        return arr;
+      let obj2 = {
+        value: 42,
+        value2: true
+      };
+
+      function compareObj(obj1, obj2) {
+        let key1 = String(Object.entries(obj1));
+        let key2 = String(Object.entries(obj2));
+        return key1 === key2;
       }
-      console.log(makeSchemeFromScheme(student));
+      console.log(compareObj(obj1, obj2)); // true
     </script>
   </body>
 </html>
