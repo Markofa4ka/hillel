@@ -1,52 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas, WebGL, Three.js</title>
+</head>
+<body>
+    <style>
+        .canvas{
+             background-color: #a7a5ca;  */
+             /*color: #ffffff; */
+        }
+    </style>
+    <canvas class = "canvas" width = "400" height = "400"></canvas>
     <script>
-      "use stict";
+        'use strict';
+        const canvas = document.querySelector( '.canvas' );
+        const ctx = canvas.getContext( '2d' );
+        let gradient = ctx.createLinearGradient(10,10,10,250);
+        gradient.addColorStop( 0, "#0ab6eb" );
+        gradient.addColorStop( 1, "#8a40f1" );
+        ctx.fillStyle = gradient;
+        ctx.fillRect( 0, 0, 400, 400);
 
-      let keys = [
-        ["value", 42, true, false, false],
-        ["value2", true, false, false, false],
-        ["value3", "Hello", true, true, true]
-      ];
+        let circleSnowman = {
+            x : 185,
+            y : 82,
+            rad : 18,
+        };
+        snowmanCircle (circleSnowman);
 
-      //   [key, value, enumerable, writable, configurable],
+        let circleEyes = {
+            x : 174,
+            y : 155,
+            rad : 3,
+        };
+        eyes (circleEyes);
 
-      function createObject(keys) {
-        let obj = {};
-        keys.forEach(function(el) {
-          Object.defineProperty(obj, el[0], {
-            value: el[1],
-            enumerable: el[2],
-            writable: el[3],
-            configurable: el[4]
-          });
-        });
-        return obj;
-      }
-      console.log(createObject(keys));
-      /* ------- 2------ */
-      let obj1 = {
-        value: 42,
-        value2: true
-      };
+        let triangleNouse = {
+            x : 182,
+            y : 164,
+        };
+        nouse (triangleNouse);
 
-      let obj2 = {
-        value: 42,
-        value2: true
-      };
+        let smile = {
+            x : 183,
+            y : 173,
+            rad : 15,
+        };
+        smileLine (smile);
 
-      function compareObj(obj1, obj2) {
-        let key1 = String(Object.entries(obj1));
-        let key2 = String(Object.entries(obj2));
-        return key1 === key2;
-      }
-      console.log(compareObj(obj1, obj2)); // true
+        let handRight = {
+            x : 135,
+            y : 230,
+        };
+        rightHandLine (handRight);
+
+        let handLeft = {
+            x : 235,
+            y : 230,
+        };
+        leftHandLine (handLeft);
+
+        let butns = {
+            x : 185,
+            y : 230,
+            rad : 3,
+        };
+        buttons (butns);
+
+        function snowmanCircle (circle) {
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();    
+            for (let i = 2; i <= 4; i++) {
+                ctx.arc( circle.x, circle.y * i , circle.rad * i , 0, 2 * Math.PI, true);
+            }
+            return ctx.fill();
+        }
+
+        function eyes (circle) {
+            ctx.fillStyle = '#000000';
+            ctx.beginPath();    
+            for (let i = 0; i < 2; i++) {
+                ctx.arc( circle.x + i * 20, circle.y , circle.rad , 0, 2 * Math.PI, true);
+            }
+            ctx.fill();
+        }
+
+        function nouse (triangle) {
+            ctx.fillStyle = '#db3232';
+            ctx.beginPath();
+            ctx.moveTo(triangle.x, triangle.y);
+            ctx.lineTo(triangle.x / 1.2, triangle.y * 1.02);
+            ctx.lineTo(triangle.x, triangle.y * 1.04);
+            ctx.lineTo(triangle.x, triangle.y);
+            ctx.fill();
+        }
+
+        function smileLine (line) {
+            ctx.strokeStyle = '#000000';
+            ctx.beginPath(); 
+            ctx.arc( line.x , line.y , line.rad , 0.6, Math.PI / 1.2, false);
+            ctx.stroke();
+        }
+
+        function rightHandLine (line) {
+            ctx.strokeStyle = '#000000';
+            ctx.beginPath();
+            ctx.moveTo(line.x , line.y);
+            ctx.lineTo(line.x - (line.x / 6), line.y + (line.y / 4));
+            ctx.lineTo(line.x - (line.x / 6), line.y + (line.y / 3));
+            ctx.moveTo(line.x - (line.x / 6), line.y+ (line.y / 4));
+            ctx.lineTo(line.x - (line.x / 4), line.y + (line.y / 3));
+            ctx.stroke();
+        }
+
+        function leftHandLine (line) {
+            ctx.strokeStyle = '#000000';
+            ctx.beginPath();
+            ctx.moveTo(line.x , line.y);
+            ctx.lineTo(line.x + (line.x / 8), line.y + (line.y / 4));
+            ctx.lineTo(line.x + (line.x / 8), line.y + (line.y / 3));
+            ctx.moveTo(line.x + (line.x / 8), line.y+ (line.y / 4));
+            ctx.lineTo(line.x + (line.x / 5), line.y + (line.y / 3));
+            ctx.stroke();
+        }
+
+        function buttons (circleBtn) {
+            ctx.fillStyle = '#000000';
+            ctx.beginPath(); 
+            for (let i = 0; i < 3; i++) {
+                ctx.arc( circleBtn.x , circleBtn.y + i * 30 , circleBtn.rad , 0, 2 * Math.PI, true);
+            }
+            ctx.fill();
+        }
+
+
+        
+
     </script>
-  </body>
+</body>
 </html>

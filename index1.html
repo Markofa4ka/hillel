@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D</title>
+</head>
+<body>
+    <script src = "three.js"></script>
+    <script>
+        'use strict';
+        const scene = new THREE.Scene();
+        const fov = 70;
+        const near = 0.1;
+        const far = 1000;
+        const aspectRatio = window.innerWidth / window.innerHeight;
+        const camera = new THREE.PerspectiveCamera( fov, aspectRatio, near, far );
+        const renderer = new THREE.WebGLRenderer({ antialias : true});
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.setClearColor( '#d0dade' );
+        document.body.prepend( renderer.domElement );
+
+        const geometry = new THREE.ConeGeometry( 10, 25, 15);
+        let material = new THREE.MeshLambertMaterial ({ color : '#f39db6'})
+        let cone = new THREE.Mesh( geometry, material );
+        scene.add( cone );
+
+        const circle = new THREE.Mesh( new THREE.DodecahedronBufferGeometry(8, 1),
+          new THREE.MeshLambertMaterial ({ color : '#fade98'}) );
+        scene.add( circle );
+
+        camera.position.z = 30;
+        cone.position.x = 15;
+        circle.position.x = -15;
+        let color = '#e1cac2';
+        let intensity = 35;
+        let light = new THREE.PointLight(0xFFFFFF);
+        let light1 = new THREE.PointLight('#e1cac2');
+        light.position.set(-10, 25, 40);
+        light1.position.set (60, -80, 15);
+        scene.add( light );
+        scene.add( light1 );
+
+        function animate() {
+            requestAnimationFrame( animate );
+            renderer.render( scene, camera );
+            circle.rotation.z -= 0.01;
+            circle.rotation.x -= 0.01;            
+            cone.rotation.y -= 0.01;
+            cone.rotation.z -= 0.01;
+        }
+        animate();
+
+    </script>
+</body>
+</html>
