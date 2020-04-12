@@ -3,141 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canvas, WebGL, Three.js</title>
-</head>
-<body>
+    <title>Document</title>
     <style>
-        .canvas{
-             background-color: #a7a5ca;  */
-             /*color: #ffffff; */
+        .conteiner {
+            display: flex;
+            justify-content: space-around;
+        }
+        .boxes {
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgb(0, 0, 0);
+            background-color: rgb(240, 0, 0);
+        }
+
+        .shadow {
+            margin-top: 20px;
+            width: 50px;
+            height: 50px;
+            
+        }
+        .radius {
+            background-color: rgb(179, 216, 228);
+            border: 2px solid rgb(0, 240, 52);
+        }
+        .border {
+            background-color: rgb(251, 219, 250);
+            border: 2px solid rgb(236, 240, 0);
+
         }
     </style>
-    <canvas class = "canvas" width = "400" height = "400"></canvas>
+</head>
+<body>
+
+    <div class = 'conteiner'>
+        <div class = 'boxes'></div>
+        <div class = 'boxes'></div>
+        <div class = 'boxes'></div>
+        <div class = 'boxes'></div>
+        <div class = 'boxes'></div>
+    </div>
+
+    <!-- -------№ 2------ -->
+
+    <div class="box shadow radius"></div>
+
     <script>
         'use strict';
-        const canvas = document.querySelector( '.canvas' );
-        const ctx = canvas.getContext( '2d' );
-        let gradient = ctx.createLinearGradient(10,10,10,250);
-        gradient.addColorStop( 0, "#0ab6eb" );
-        gradient.addColorStop( 1, "#8a40f1" );
-        ctx.fillStyle = gradient;
-        ctx.fillRect( 0, 0, 400, 400);
+        const $boxes = document.querySelectorAll('.boxes');
+        $boxes.forEach (function (box) {
+            box.addEventListener ('click', function() {
+                const $conteiner = document.querySelector('.conteiner').append(this);
+                let bgColor = this.style.backgroundColor;
+                let blue = 'rgb(24, 0, 240)';
+                let green = 'rgb(0, 138, 0)';
+                let yellow = 'rgb(245, 245, 7)';
+                let red = 'rgb(240, 0, 0)';
+                switch (bgColor) {
+                    case red : 
+                        this.style.backgroundColor = blue;
+                        break;
+                    case blue : 
+                        this.style.backgroundColor = green;
+                        break;
+                    case green :
+                        this.style.backgroundColor = yellow;
+                        break;
+                    default :
+                        this.style.backgroundColor = red;
+                } 
+            });
+        });
 
-        let circleSnowman = {
-            x : 185,
-            y : 82,
-            rad : 18,
-        };
-        snowmanCircle (circleSnowman);
 
-        let circleEyes = {
-            x : 174,
-            y : 155,
-            rad : 3,
-        };
-        eyes (circleEyes);
+        /*--------№ 2-------*/
+        const $cont = document.querySelector('.box');
+        $cont.addEventListener ('click', function() {
+            toggleClass ($cont, 'border');
+        });
 
-        let triangleNouse = {
-            x : 182,
-            y : 164,
-        };
-        nouse (triangleNouse);
-
-        let smile = {
-            x : 183,
-            y : 173,
-            rad : 15,
-        };
-        smileLine (smile);
-
-        let handRight = {
-            x : 135,
-            y : 230,
-        };
-        rightHandLine (handRight);
-
-        let handLeft = {
-            x : 235,
-            y : 230,
-        };
-        leftHandLine (handLeft);
-
-        let butns = {
-            x : 185,
-            y : 230,
-            rad : 3,
-        };
-        buttons (butns);
-
-        function snowmanCircle (circle) {
-            ctx.fillStyle = '#ffffff';
-            ctx.beginPath();    
-            for (let i = 2; i <= 4; i++) {
-                ctx.arc( circle.x, circle.y * i , circle.rad * i , 0, 2 * Math.PI, true);
+        function toggleClass( el , classNewEl ) {
+            const classes = el.className.split(' ');
+            let hasClass = false;
+            classes.forEach (function (currentClass){
+                if ( currentClass === classNewEl ) {
+                    hasClass = true;
+                }
+            });
+            if ( hasClass) {
+                let classInd = classes.findIndex ( function (currentClass){
+                    return currentClass === classNewEl;
+                });
+                classes.splice (classInd, 1);
+            }else {
+                classes.push (classNewEl);
             }
-            return ctx.fill();
-        }
-
-        function eyes (circle) {
-            ctx.fillStyle = '#000000';
-            ctx.beginPath();    
-            for (let i = 0; i < 2; i++) {
-                ctx.arc( circle.x + i * 20, circle.y , circle.rad , 0, 2 * Math.PI, true);
-            }
-            ctx.fill();
-        }
-
-        function nouse (triangle) {
-            ctx.fillStyle = '#db3232';
-            ctx.beginPath();
-            ctx.moveTo(triangle.x, triangle.y);
-            ctx.lineTo(triangle.x / 1.2, triangle.y * 1.02);
-            ctx.lineTo(triangle.x, triangle.y * 1.04);
-            ctx.lineTo(triangle.x, triangle.y);
-            ctx.fill();
-        }
-
-        function smileLine (line) {
-            ctx.strokeStyle = '#000000';
-            ctx.beginPath(); 
-            ctx.arc( line.x , line.y , line.rad , 0.6, Math.PI / 1.2, false);
-            ctx.stroke();
-        }
-
-        function rightHandLine (line) {
-            ctx.strokeStyle = '#000000';
-            ctx.beginPath();
-            ctx.moveTo(line.x , line.y);
-            ctx.lineTo(line.x - (line.x / 6), line.y + (line.y / 4));
-            ctx.lineTo(line.x - (line.x / 6), line.y + (line.y / 3));
-            ctx.moveTo(line.x - (line.x / 6), line.y+ (line.y / 4));
-            ctx.lineTo(line.x - (line.x / 4), line.y + (line.y / 3));
-            ctx.stroke();
-        }
-
-        function leftHandLine (line) {
-            ctx.strokeStyle = '#000000';
-            ctx.beginPath();
-            ctx.moveTo(line.x , line.y);
-            ctx.lineTo(line.x + (line.x / 8), line.y + (line.y / 4));
-            ctx.lineTo(line.x + (line.x / 8), line.y + (line.y / 3));
-            ctx.moveTo(line.x + (line.x / 8), line.y+ (line.y / 4));
-            ctx.lineTo(line.x + (line.x / 5), line.y + (line.y / 3));
-            ctx.stroke();
-        }
-
-        function buttons (circleBtn) {
-            ctx.fillStyle = '#000000';
-            ctx.beginPath(); 
-            for (let i = 0; i < 3; i++) {
-                ctx.arc( circleBtn.x , circleBtn.y + i * 30 , circleBtn.rad , 0, 2 * Math.PI, true);
-            }
-            ctx.fill();
-        }
-
+            return el.className = classes.join (' ');
+        } 
 
         
-
+        
     </script>
 </body>
 </html>
