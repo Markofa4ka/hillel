@@ -1,106 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8" />
     <style>
-        .conteiner {
+        .content {
             display: flex;
-            justify-content: space-around;
-        }
-        .boxes {
-            width: 50px;
-            height: 50px;
-            border: 2px solid rgb(0, 0, 0);
-            background-color: rgb(240, 0, 0);
         }
 
-        .shadow {
-            margin-top: 20px;
+        .box {
+            margin: 5px;
             width: 50px;
             height: 50px;
+            border: 1px solid;
+            font-size: 15pt;
+            text-align: center;
             
         }
-        .radius {
-            background-color: rgb(179, 216, 228);
-            border: 2px solid rgb(0, 240, 52);
-        }
-        .border {
-            background-color: rgb(251, 219, 250);
-            border: 2px solid rgb(236, 240, 0);
 
+        .box span {
+           display: block;
+           text-align: center;
         }
+
     </style>
 </head>
 <body>
-
-    <div class = 'conteiner'>
-        <div class = 'boxes'></div>
-        <div class = 'boxes'></div>
-        <div class = 'boxes'></div>
-        <div class = 'boxes'></div>
-        <div class = 'boxes'></div>
+    <div class="content">
+        <div class="box">
+            <span> 0 </span>
+            <button type = "btn" data-action = "plus"> + </button>
+            <button type = "btn" data-action = "minus"> - </button>
+        </div>
+        <div class="box">
+            <span> 0 </span>
+            <button type = "btn" data-action = "plus"> + </button>
+            <button type = "btn" data-action = "minus"> - </button>
+        </div>
+        <div class="box">
+            <span> 0 </span>
+            <button type = "btn" data-action = "plus"> + </button>
+            <button type = "btn" data-action = "minus"> - </button>
+        </div>
+        <div class="box">
+            <span> 0 </span>
+            <button type = "btn" data-action = "plus"> + </button>
+            <button type = "btn" data-action = "minus"> - </button>
+        </div>
+        <div class="box">
+            <span> 0 </span>
+            <button type = "btn" data-action = "plus"> + </button>
+            <button type = "btn" data-action = "minus"> - </button>
+        </div>
     </div>
-
-    <!-- -------№ 2------ -->
-
-    <div class="box shadow radius"></div>
-
     <script>
-        'use strict';
-        const $boxes = document.querySelectorAll('.boxes');
-        $boxes.forEach (function (box) {
-            box.addEventListener ('click', function() {
-                const $conteiner = document.querySelector('.conteiner').append(this);
-                let bgColor = this.style.backgroundColor;
-                let blue = 'rgb(24, 0, 240)';
-                let green = 'rgb(0, 138, 0)';
-                let yellow = 'rgb(245, 245, 7)';
-                let red = 'rgb(240, 0, 0)';
-                switch (bgColor) {
-                    case red : 
-                        this.style.backgroundColor = blue;
-                        break;
-                    case blue : 
-                        this.style.backgroundColor = green;
-                        break;
-                    case green :
-                        this.style.backgroundColor = yellow;
-                        break;
-                    default :
-                        this.style.backgroundColor = red;
-                } 
-            });
-        });
-
-
-        /*--------№ 2-------*/
-        const $cont = document.querySelector('.box');
-        $cont.addEventListener ('click', function() {
-            toggleClass ($cont, 'border');
-        });
-
-        function toggleClass( el , classNewEl ) {
-            const classes = el.className.split(' ');
-            let hasClass = false;
-            classes.forEach (function (currentClass){
-                if ( currentClass === classNewEl ) {
-                    hasClass = true;
-                }
-            });
-            if ( hasClass) {
-                let classInd = classes.findIndex ( function (currentClass){
-                    return currentClass === classNewEl;
+        document.querySelectorAll(".box")
+        .forEach(function (box){
+            box.querySelector('[data-action = "plus"]')
+                .addEventListener('click', function() {
+                    this.parentNode.firstElementChild.textContent++;
                 });
-                classes.splice (classInd, 1);
-            }else {
-                classes.push (classNewEl);
-            }
-            return el.className = classes.join (' ');
-        } 
+            box.querySelector('[data-action = "minus"]')
+                .addEventListener('click', function() {
+                    this.parentNode.firstElementChild.textContent--;
+                });
+        });
 
-        
+        /*-----2-----*/
+
+        function qParamsFromUrl(queryStr) {
+            let obj = {};
+            location.search.slice(1).split('&').forEach(function(el){
+                let par = el.split('=');
+                obj[par[0]] = decodeURIComponent(par[1]);
+            });
+            return obj;
+        }
+
+        console.log (qParamsFromUrl());
         
     </script>
 </body>
