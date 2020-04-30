@@ -1,83 +1,56 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <style>
-        .content {
-            display: flex;
-        }
-
-        .box {
-            margin: 5px;
-            width: 50px;
-            height: 50px;
-            border: 1px solid;
-            font-size: 15pt;
-            text-align: center;
-            
-        }
-
-        .box span {
-           display: block;
-           text-align: center;
-        }
-
-    </style>
-</head>
-<body>
-    <div class="content">
-        <div class="box">
-            <span> 0 </span>
-            <button type = "btn" data-action = "plus"> + </button>
-            <button type = "btn" data-action = "minus"> - </button>
-        </div>
-        <div class="box">
-            <span> 0 </span>
-            <button type = "btn" data-action = "plus"> + </button>
-            <button type = "btn" data-action = "minus"> - </button>
-        </div>
-        <div class="box">
-            <span> 0 </span>
-            <button type = "btn" data-action = "plus"> + </button>
-            <button type = "btn" data-action = "minus"> - </button>
-        </div>
-        <div class="box">
-            <span> 0 </span>
-            <button type = "btn" data-action = "plus"> + </button>
-            <button type = "btn" data-action = "minus"> - </button>
-        </div>
-        <div class="box">
-            <span> 0 </span>
-            <button type = "btn" data-action = "plus"> + </button>
-            <button type = "btn" data-action = "minus"> - </button>
-        </div>
-    </div>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
     <script>
-        document.querySelectorAll(".box")
-        .forEach(function (box){
-            box.querySelector('[data-action = "plus"]')
-                .addEventListener('click', function() {
-                    this.parentNode.firstElementChild.textContent++;
-                });
-            box.querySelector('[data-action = "minus"]')
-                .addEventListener('click', function() {
-                    this.parentNode.firstElementChild.textContent--;
-                });
-        });
+      "use strict";
+      const arr = [15, 25, 35, 45, 78];
 
-        /*-----2-----*/
-
-        function qParamsFromUrl(queryStr) {
-            let obj = {};
-            location.search.slice(1).split('&').forEach(function(el){
-                let par = el.split('=');
-                obj[par[0]] = decodeURIComponent(par[1]);
-            });
-            return obj;
+      let map = function (arr, cb, thisArg) {
+        let res = [];
+        for (let i = 0; i < arr.length; i++) {
+          res.push(cb.call(thisArg, arr[i], i, arr[i]));
         }
+        return res;
+      };
 
-        console.log (qParamsFromUrl());
-        
+      let sum = map(
+        arr,
+        function (el, i, arr) {
+          return {
+            arrElement: arr,
+            example: `${el} * ${el}`,
+            res: el * el,
+          };
+        },
+        {}
+      );
+      console.log(sum);
+
+      /*-------2------*/
+
+      const people = {
+        name: "Helen",
+      };
+
+      function info(phone, email) {
+        console.log(`name : ${this.name}, phone : ${phone}, email : ${email}`);
+      }
+
+      function bind(fn, cont) {
+        const rest = Array.prototype.slice.call(arguments, 2);
+        return function () {
+          const args = Array.prototype.slice.call(arguments);
+          return fn.apply(cont, rest.concat(args));
+        };
+      }
+
+      bind(info, people)("0937125953", "markofa4ka@gmail.com");
+      bind(info, people, "0937125953", "markofa4ka@gmail.com")();
     </script>
-</body>
+  </body>
 </html>
