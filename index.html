@@ -7,55 +7,22 @@
   </head>
   <body>
     <script>
-      function FizzBuzz(num) {
-        for (let i = 1; i <= num; i++) {
-          if (i % 3 === 0 && i % 5 === 0) {
-            console.log("fizzbuzz");
-          } else if (i % 5 === 0) {
-            console.log("buzz");
-          } else if (i % 3 === 0) {
-            console.log("fizz");
-          } else {
-            console.log(i);
-          }
-        }
+      "use strict";
+      function createCounter(counter) {
+        // let counter = 0; --> или строго прировнять к любому числу.
+        return function myFunction(num) {
+          return (counter += num);
+        };
       }
-      FizzBuzz(15);
+      const increment = createCounter(0);
+      const c1 = increment(3);
+      const c2 = increment(5);
+      const c3 = increment(20);
+      console.log(c1, c2, c3);
 
-      function findVowels(str) {
-        let res = 0;
-        const vowels = ["a", "e", "i", "o", "u"];
-        for (let char of str.toLowerCase()) {
-          if (vowels.includes(char)) {
-            res++;
-          }
-        }
-        return res;
-      }
-      console.log(findVowels("Hello world!!!"));
+      /*---------- 2 ----------*/
 
-      function fibonacci(n) {
-        if (n < 2) return 1;
-        return (fibonacci(n-1) + fibonacci(n-2)); 
-      }
-      console.log(fibonacci(6)); /* через рекурсию */
-
-      function fib (n) {
-        let a = 0;
-        let b = 1;
-        let c = 1;
-        for ( let i = 1; i <= n; i++) {
-            c = a + b;
-            a = b;
-            b = c; 
-        }
-        return c;
-      }
-      console.log(fib(6)); /* простой вариант */
-      
-
-      
-      
+      /* мозги сломала с поиском палиндромма, буду еще пытаться решить эту задачку. Но в голову ничего не лезит(( запуталась.*/
     </script>
   </body>
 </html>
