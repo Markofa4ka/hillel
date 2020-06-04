@@ -7,50 +7,55 @@
   </head>
   <body>
     <script>
-      "use strict";
-      const arr = [15, 25, 35, 45, 78];
+      function FizzBuzz(num) {
+        for (let i = 1; i <= num; i++) {
+          if (i % 3 === 0 && i % 5 === 0) {
+            console.log("fizzbuzz");
+          } else if (i % 5 === 0) {
+            console.log("buzz");
+          } else if (i % 3 === 0) {
+            console.log("fizz");
+          } else {
+            console.log(i);
+          }
+        }
+      }
+      FizzBuzz(15);
 
-      let map = function (arr, cb, thisArg) {
-        let res = [];
-        for (let i = 0; i < arr.length; i++) {
-          res.push(cb.call(thisArg, arr[i], i, arr[i]));
+      function findVowels(str) {
+        let res = 0;
+        const vowels = ["a", "e", "i", "o", "u"];
+        for (let char of str.toLowerCase()) {
+          if (vowels.includes(char)) {
+            res++;
+          }
         }
         return res;
-      };
-
-      let sum = map(
-        arr,
-        function (el, i, arr) {
-          return {
-            arrElement: arr,
-            example: `${el} * ${el}`,
-            res: el * el,
-          };
-        },
-        {}
-      );
-      console.log(sum);
-
-      /*-------2------*/
-
-      const people = {
-        name: "Helen",
-      };
-
-      function info(phone, email) {
-        console.log(`name : ${this.name}, phone : ${phone}, email : ${email}`);
       }
+      console.log(findVowels("Hello world!!!"));
 
-      function bind(fn, cont) {
-        const rest = Array.prototype.slice.call(arguments, 2);
-        return function () {
-          const args = Array.prototype.slice.call(arguments);
-          return fn.apply(cont, rest.concat(args));
-        };
+      function fibonacci(n) {
+        if (n < 2) return 1;
+        return (fibonacci(n-1) + fibonacci(n-2)); 
       }
+      console.log(fibonacci(6)); /* через рекурсию */
 
-      bind(info, people)("0937125953", "markofa4ka@gmail.com");
-      bind(info, people, "0937125953", "markofa4ka@gmail.com")();
+      function fib (n) {
+        let a = 0;
+        let b = 1;
+        let c = 1;
+        for ( let i = 1; i <= n; i++) {
+            c = a + b;
+            a = b;
+            b = c; 
+        }
+        return c;
+      }
+      console.log(fib(6)); /* простой вариант */
+      
+
+      
+      
     </script>
   </body>
 </html>
